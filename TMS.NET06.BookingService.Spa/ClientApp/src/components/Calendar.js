@@ -16,9 +16,6 @@ export class Calendar extends Component {
 
     async componentDidMount() {
         await this.populateAvailableDates();
-        
-        
-        
     }
 
     render() {
@@ -73,7 +70,6 @@ export class Calendar extends Component {
     }
 
     setDate(date) {
-        console.log(date);
         this.setState({ selectedDate:date });
         this.populateAvailableTimes(date);
         this.props.updateSelectedDate(date);

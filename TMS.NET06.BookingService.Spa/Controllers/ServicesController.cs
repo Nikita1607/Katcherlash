@@ -57,7 +57,6 @@ namespace TMS.NET06.BookingService.Spa.Controllers
         [HttpPost]
         [Route("[action]")]
         public Task<IEnumerable<string>> AvailableTimesAsync([FromBody] AvaliableTimeRequest avaliableTimeRequest )
-
         {
             return Task.FromResult(GetTimesList(avaliableTimeRequest.serviceId, avaliableTimeRequest.date).AsEnumerable());
         }
@@ -72,9 +71,42 @@ namespace TMS.NET06.BookingService.Spa.Controllers
                 "10:30",
                 "11:00",
                 "11:30",
-
-
             };
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public Task<bool> AddBookingEntryAsync([FromBody] AddBookingEntryRequest addBookingEntryRequest)
+        {
+            using (var bookingContext = new BookingContext())
+            {
+                //Поиск существующего по контактной информации
+                var client = new Client()
+                {
+                    Name = addBookingEntryRequest.Username,
+                    ContactInformation = new ContactInfo()
+                    {
+                        Email = addBookingEntryRequest.Email
+                    }
+                };
+
+                bookingContext.Clients.Add(client);
+
+                var bookEntry = new BookEntry()
+                {
+                    Service = bookingContext.Services.Single(s => s.ServiceId == addBookingEntryRequest.ServiceId),
+                    VisitDate = addBookingEntryRequest.SelectedDate.ToLocalTime(),
+                    Comment = addBookingEntryRequest.Description,
+                    Client = client,
+                    Status = BookingStatus.Confirmed
+                };
+
+                bookingContext.BookingEntries.Add(bookEntry);
+
+                bookingContext.SaveChanges();
+            }
+
+            return Task.FromResult(true);
         }
     }
 }

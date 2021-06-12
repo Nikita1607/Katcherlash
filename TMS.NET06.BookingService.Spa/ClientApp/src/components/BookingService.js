@@ -7,7 +7,7 @@ export class BookingService extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { services: [], loading: true, selectedServiceId: null, selectedDate: null, activeUserinfo: false };
+        this.state = { services: [], loading: true, selectedServiceId: null, selectedDate: null, activeUserinfo: false, userName: null, email: null, description: null };
 
         this.openPageUserinfo = this.openPageUserinfo.bind(this);
     }
@@ -16,12 +16,7 @@ export class BookingService extends Component {
         this.setState({ selectedDate: value })
     }
 
-    updateUserData = (userName, email, description) => {
-        this.setState({ userName: userName, email: email, description: description })
-    }
-
     selectService(service) {
-        console.log(service.serviceId);
         this.setState({ selectedServiceId: service.serviceId });
     }
 
@@ -45,7 +40,7 @@ export class BookingService extends Component {
                     <Container>
                         <Row>
                             <Col>
-                                <Userinfo updateUserData={this.updateUserData}/>
+                                <Userinfo serviceId={this.state.selectedServiceId} selectedDate={this.state.selectedDate} />
                             </Col>
                         </Row>
                     </Container>

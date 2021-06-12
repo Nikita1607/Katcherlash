@@ -13,6 +13,11 @@ namespace TMS.NET06.BookingSystem
         public DbSet<Service> Services { get; set; }
         public DbSet<Client> Clients { get; internal set; }
 
+        public BookingContext()
+        {
+            this._connectionString = @"Server=.\SQLExpress;Database=BookingSystem;Trusted_Connection=True;MultipleActiveResultSets=true";
+        }
+
         public BookingContext(string connectionString)
         {
             this._connectionString = connectionString;
