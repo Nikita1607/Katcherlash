@@ -35,23 +35,9 @@ namespace TMS.NET06.BookingService.Spa.Controllers
         {
             System.Threading.Thread.Sleep(1000);
             //return Task.FromResult(new[] { DateTime.Now.Date, DateTime.Now.AddMonths(1) }.AsEnumerable());
-            return Task.FromResult(GetDatesList(30).AsEnumerable());
-        }
+            List<DateTime> AvailableDates = _bookingRepository.GetDatesList(60);
 
-        private List<DateTime> GetDatesList(int CountDays)
-        {
-            var DatesList = new List<DateTime>();
-
-            var currentDate = DateTime.Now;
-            var endDate = DateTime.Now.AddMonths(2);
-
-            while (currentDate <= endDate)
-            {
-                DatesList.Add(currentDate);
-                currentDate = currentDate.AddDays(1);
-            }
-
-            return DatesList;
+            return Task.FromResult(AvailableDates.AsEnumerable());
         }
 
         [HttpPost]
@@ -65,12 +51,21 @@ namespace TMS.NET06.BookingService.Spa.Controllers
         {
             return new List<string>()
             {
-                "09:00",
+                "01:00",
+                "02:00",
+                "03:00",
+                "04:00",
+                "05:00",
+                "06:00",
                 "09:30",
                 "10:00",
                 "10:30",
                 "11:00",
                 "11:30",
+                "19:30",
+                "20:30",
+                "21:30",
+                "22:30",
             };
         }
 

@@ -29,5 +29,7 @@ namespace TMS.NET06.BookingSystem
         Task<BookEntry> GetBookingAsync (int bookingid);
 
         Task<Service> GetServiceAsync(int serviceId);
+
+        List<DateTime> GetDatesList(int countDays);
     }
 }

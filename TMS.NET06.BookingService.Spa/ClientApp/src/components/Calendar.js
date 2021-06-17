@@ -1,9 +1,23 @@
 ﻿import React, { Component } from 'react';
-import DatePicker from 'react-datepicker';
 import setDate from "date-fns/setDate";
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
-import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ru } from "date-fns/locale/ru/index.js";
+import { Row, Col} from 'reactstrap';
+registerLocale('ru', ru);
+setDefaultLocale('ru');
+
+const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+const locale = {
+    localize: {
+        month: n => months[n],
+        day: n => days[n]
+    },
+    formatLong: {}
+};
 
 export class Calendar extends Component {
     constructor(props) {
@@ -20,21 +34,27 @@ export class Calendar extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Select Date</h1>
+            <Row>
+                <div className="text-center">
+                    <Col sm={12}>
+
+                <h1>Выберите дату</h1>
                 {this.state.availableDates == null
-                    ? <div>Our neural network is processing you data...</div>
+                    ? <div>Подождите.Идет загрузка...</div>
                     : <DatePicker
                         showTimeSelect
                         strictParsing
                         timeFormat="HH:mm"
+                        //formatWeekDay={ru}
+                        locale={locale}
                         selected={this.state.selectedDate}
                         onChange={(date) => this.setDate(date)}
                         includeDates={this.state.availableDates}
                         includeTimes={this.state.availableTimes}
                         inline />
-                }
-            </div>
+                }</Col>
+                </div>
+                </Row>
               //<Button variant="primary">Продолжить</Button>{ ' ' }
         )
     }

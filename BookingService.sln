@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingService.Spa", "..\Katcherlash\TMS.NET06.BookingService.Spa\TMS.NET06.BookingService.Spa.csproj", "{F34EB890-3DC1-4102-8FF4-5AD3839D4B1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem", "..\Katcherlash\TMS.NET06.BookingSystem\TMS.NET06.BookingSystem.csproj", "{F843D2AF-0AE6-4197-A130-D182D08DB341}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem.Notificator", "..\Katcherlash\TMS.NET06.BookingSystem.Notificator\TMS.NET06.BookingSystem.Notificator.csproj", "{4DEF3CDC-E363-49BA-9BDE-6B8F232D142A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem.Web", "..\Katcherlash\TMS.NET06.BookingSystem.Web\TMS.NET06.BookingSystem.Web.csproj", "{54AE823F-73B3-43CF-8B5B-00A25E17E25F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F34EB890-3DC1-4102-8FF4-5AD3839D4B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34EB890-3DC1-4102-8FF4-5AD3839D4B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34EB890-3DC1-4102-8FF4-5AD3839D4B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34EB890-3DC1-4102-8FF4-5AD3839D4B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F843D2AF-0AE6-4197-A130-D182D08DB341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F843D2AF-0AE6-4197-A130-D182D08DB341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F843D2AF-0AE6-4197-A130-D182D08DB341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F843D2AF-0AE6-4197-A130-D182D08DB341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEF3CDC-E363-49BA-9BDE-6B8F232D142A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEF3CDC-E363-49BA-9BDE-6B8F232D142A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEF3CDC-E363-49BA-9BDE-6B8F232D142A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEF3CDC-E363-49BA-9BDE-6B8F232D142A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54AE823F-73B3-43CF-8B5B-00A25E17E25F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54AE823F-73B3-43CF-8B5B-00A25E17E25F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54AE823F-73B3-43CF-8B5B-00A25E17E25F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54AE823F-73B3-43CF-8B5B-00A25E17E25F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C9EB08A-1935-4DFD-9D4C-AAD904D16678}
+	EndGlobalSection
+EndGlobal

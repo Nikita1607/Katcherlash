@@ -119,5 +119,46 @@ namespace TMS.NET06.BookingSystem
         {
             return new BookingContext(_configuration.GetConnectionString("BookingDb"));
         }
+
+        public List<DateTime> GetDatesList(int countDays)
+        {
+            using var context = CreateContext();
+            var visitDates = context.BookingEntries.Where(be => be.VisitDate >= DateTime.Now.Date && be.VisitDate < DateTime.Now.Date.AddDays(countDays + 1))
+                                                     .OrderBy(be => be.VisitDate).ToArray();
+
+            var AvailableDates = new List<DateTime>();
+
+            List<DateTime> allDates = GetAllDates(countDays);
+
+            foreach (var currDate in allDates)
+            {
+                var visitDatesForCurrDate = visitDates.Where(v => v.VisitDate >= currDate.Date && v.VisitDate < currDate.Date.AddDays(1)).ToArray();
+
+                if (visitDatesForCurrDate.Count() >= 7)
+                {
+                    continue;
+                }
+
+                AvailableDates.Add(currDate);
+            }
+
+            return AvailableDates;
+        }
+
+        private List<DateTime> GetAllDates(int CountDays)
+        {
+            var DatesList = new List<DateTime>();
+
+            var currentDate = DateTime.Now;
+            var endDate = DateTime.Now.AddMonths(2);
+
+            while (currentDate <= endDate)
+            {
+                DatesList.Add(currentDate);
+                currentDate = currentDate.AddDays(1);
+            }
+
+            return DatesList;
+        }
     }
 }

@@ -1,5 +1,8 @@
 ﻿import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 export class Userinfo extends Component {
     constructor(props) {
@@ -36,22 +39,28 @@ export class Userinfo extends Component {
 
     render() {
         if (this.state.addedBookingEntry) {
-            return <p><em>Ваша запись принята в обработку</em></p>
+            return (
+                <p><em>Ваша запись принята в обработку</em></p>,
+
+             <NavItem>
+                 <NavItem tag={Link} to="/">Вернуться наглавную</NavItem>
+          </NavItem>)
+           
         }
         else {
             return (
             <Form>
                 <FormGroup>
-                    <Label for="UserName">UserName</Label>
-                    <Input type="text" name="UserName" id="UserName" placeholder="Введите Имя" />
+                    <Label for="UserName">Введите ваше Имя</Label>
+                    <Input type="text" name="UserName" id="UserName" placeholder="Ваше Имя" />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="Email">Email</Label>
-                    <Input type="email" name="email" id="Email" placeholder="Введите email" />
+                    <Label for="Email">Введите вашу электронную почту</Label>
+                    <Input type="email" name="email" id="Email" placeholder="Ваш e-mail" />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="Description">Description</Label>
-                    <Input type="textarea" name="Description" id="Description" placeholder="Введите описание" />
+                    <Label for="Description">Комментарий</Label>
+                    <Input type="textarea" name="Description" id="Description" placeholder="Оставьте ваш комментарий к записи" />
                 </FormGroup>
                 <FormGroup>
                     <Button color="primary"
