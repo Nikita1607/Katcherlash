@@ -134,7 +134,7 @@ namespace TMS.NET06.BookingSystem
             {
                 var visitDatesForCurrDate = visitDates.Where(v => v.VisitDate >= currDate.Date && v.VisitDate < currDate.Date.AddDays(1)).ToArray();
 
-                if (visitDatesForCurrDate.Count() >= 7)
+                if (visitDatesForCurrDate.Count() >= 9)
                 {
                     continue;
                 }
@@ -159,6 +159,39 @@ namespace TMS.NET06.BookingSystem
             }
 
             return DatesList;
+        }
+
+        public List<DateTime> GetTimesList(DateTime selectedDate)
+        {
+            var timeList = new List<DateTime>();
+
+            using var context = CreateContext();
+            var visitDates = context.BookingEntries.Where(be => be.VisitDate >= selectedDate.Date && be.VisitDate < selectedDate.Date.AddDays(1))
+                                                   .OrderBy(be => be.VisitDate).ToArray();
+
+            DateTime beginDay = selectedDate.Date.AddHours(9);
+            DateTime endDay = selectedDate.Date.AddHours(17);
+
+            int count;
+
+            for (DateTime d = beginDay; d <= endDay; d = d.AddHours(1))
+            {
+                if (visitDates.Count() > 0)
+                {
+                    count = visitDates.Count(be => be.VisitDate >= d && be.VisitDate < d.AddSeconds(1));
+                    if (count > 0)
+                    {
+                        continue;
+                    }
+                }
+                else if (d <= DateTime.Now)
+                {
+                    continue;
+                }
+                timeList.Add(d.AddHours(-3));
+            }
+
+            return timeList;
         }
     }
 }

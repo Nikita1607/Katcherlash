@@ -34,7 +34,7 @@ static displayName = NavMenu.name;
                   <NavLink tag={Link} className="text-dark" to="/">Главная</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/yclients">Онлай запись</NavLink>
+                  <NavLink tag={Link} className="text-dark" to="/bookingClient">Онлай запись</NavLink>
                 </NavItem>
               </ul>
             </Collapse>

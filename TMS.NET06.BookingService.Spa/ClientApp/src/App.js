@@ -18,7 +18,7 @@ static displayName = App.name;
             <Route exact path='/' component={Home} />
             <Route path='/counter' component={Counter} />
             <Route path='/fetch-data' component={FetchData} />
-                <Route path='/yclients' component={BookingService} />
+            <Route path='/bookingClient' component={BookingService} />
             </Layout>
             
         //<Layout>

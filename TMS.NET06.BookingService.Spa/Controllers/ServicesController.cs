@@ -42,32 +42,33 @@ namespace TMS.NET06.BookingService.Spa.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public Task<IEnumerable<string>> AvailableTimesAsync([FromBody] AvaliableTimeRequest avaliableTimeRequest )
+        public Task<IEnumerable<DateTime>> AvailableTimesAsync([FromBody] AvaliableTimeRequest avaliableTimeRequest )
         {
-            return Task.FromResult(GetTimesList(avaliableTimeRequest.serviceId, avaliableTimeRequest.date).AsEnumerable());
+            //return Task.FromResult(GetTimesList(avaliableTimeRequest.serviceId, avaliableTimeRequest.date).AsEnumerable());
+            return Task.FromResult(_bookingRepository.GetTimesList(avaliableTimeRequest.date).AsEnumerable());
         }
 
-        private List<String> GetTimesList(int serviceId , DateTime date)
-        {
-            return new List<string>()
-            {
-                "01:00",
-                "02:00",
-                "03:00",
-                "04:00",
-                "05:00",
-                "06:00",
-                "09:30",
-                "10:00",
-                "10:30",
-                "11:00",
-                "11:30",
-                "19:30",
-                "20:30",
-                "21:30",
-                "22:30",
-            };
-        }
+        //private List<String> GetTimesList_old(int serviceId , DateTime date)
+        //{
+        //    return new List<string>()
+        //    {
+        //        "01:00",
+        //        "02:00",
+        //        "03:00",
+        //        "04:00",
+        //        "05:00",
+        //        "06:00",
+        //        "09:30",
+        //        "10:00",
+        //        "10:30",
+        //        "11:00",
+        //        "11:30",
+        //        "19:30",
+        //        "20:30",
+        //        "21:30",
+        //        "22:30",
+        //    };
+        //}
 
         [HttpPost]
         [Route("[action]")]

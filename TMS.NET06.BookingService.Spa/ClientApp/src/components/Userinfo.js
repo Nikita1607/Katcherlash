@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -40,12 +40,21 @@ export class Userinfo extends Component {
     render() {
         if (this.state.addedBookingEntry) {
             return (
-                <p><em>Ваша запись принята в обработку</em></p>,
-
-             <NavItem>
-                 <NavItem tag={Link} to="/">Вернуться наглавную</NavItem>
-          </NavItem>)
-           
+                <Col sm={12}>
+                    <Row>
+                        <Col sm={12}>
+                            <p><em>Ваша запись принята в обработку</em></p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <ul>
+                            <NavItem>
+                                <NavItem tag={Link} to="/">Вернуться наглавную</NavItem>
+                            </NavItem>
+                        </ul>
+                    </Row>
+                </Col>
+            )
         }
         else {
             return (

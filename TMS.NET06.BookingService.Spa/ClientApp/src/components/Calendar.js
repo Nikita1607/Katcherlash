@@ -43,7 +43,7 @@ export class Calendar extends Component {
                     ? <div>Подождите.Идет загрузка...</div>
                     : <DatePicker
                         showTimeSelect
-                        strictParsing
+                        timeIntervals={60}        
                         timeFormat="HH:mm"
                         //formatWeekDay={ru}
                         locale={locale}
@@ -86,7 +86,9 @@ export class Calendar extends Component {
             body: JSON.stringify({ serviceId: this.serviceId, date: date })
         });
         const data = await response.json();
-        this.setState({ availableTimes: data.map(TimeString => setHours(setMinutes(new Date(this.state.selectedDate), parseInt(TimeString.slice(3, 5))), parseInt(TimeString.slice(0, 2))))});
+        //this.setState({ availableTimes: data.map(TimeString => setHours(setMinutes(new Date(this.state.selectedDate), parseInt(TimeString.slice(3, 5))), parseInt(TimeString.slice(0, 2))))});
+        this.setState({ availableTimes: data.map(dateString => new Date(dateString)) });
+        console.log(data);
     }
 
     setDate(date) {
