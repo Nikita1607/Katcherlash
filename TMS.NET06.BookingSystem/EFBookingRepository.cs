@@ -188,7 +188,7 @@ namespace TMS.NET06.BookingSystem
                 {
                     continue;
                 }
-                timeList.Add(d.AddHours(-3));
+                timeList.Add(d);
             }
 
             return timeList;

@@ -2,6 +2,7 @@
 import { Container, Row, Col, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { Calendar } from './Calendar';
 import { Userinfo } from './Userinfo';
+import './BookingService.css';
 
 export class BookingService extends Component {
 
@@ -72,14 +73,14 @@ export class BookingService extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <h2>KatcherLash</h2>
+                        <h2>Выбирете процедуру:</h2>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <ListGroup>
-                    {this.state.services.map(service =>
-                        <ListGroupItem key={service.serviceId} tag="button" onClick={() => this.selectService(service)}>{service.name}</ListGroupItem>
+                            {this.state.services.map(service =>
+                                <ListGroupItem  color="success" key={service.serviceId} tag="button" onClick={() => this.selectService(service)}>{service.name}</ListGroupItem>
                     )}                            
                        </ListGroup>
                     </Col>

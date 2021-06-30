@@ -5,12 +5,13 @@ import setMinutes from "date-fns/setMinutes";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { ru } from "date-fns/locale/ru/index.js";
-import { Row, Col} from 'reactstrap';
+import { Row, Col } from 'reactstrap';
+import './Calendar.css';
 registerLocale('ru', ru);
 setDefaultLocale('ru');
 
 const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+const days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 const locale = {
     localize: {
         month: n => months[n],
@@ -32,12 +33,12 @@ export class Calendar extends Component {
         await this.populateAvailableDates();
     }
 
+   
+
     render() {
         return (
             <Row>
-                <div className="text-center">
-                    <Col sm={12}>
-
+                <div>
                 <h1>Выберите дату</h1>
                 {this.state.availableDates == null
                     ? <div>Подождите.Идет загрузка...</div>
@@ -46,13 +47,15 @@ export class Calendar extends Component {
                         timeIntervals={60}        
                         timeFormat="HH:mm"
                         //formatWeekDay={ru}
-                        locale={locale}
+                            locale={locale}
+                            
                         selected={this.state.selectedDate}
                         onChange={(date) => this.setDate(date)}
                         includeDates={this.state.availableDates}
                         includeTimes={this.state.availableTimes}
-                        inline />
-                }</Col>
+                            inline />
+                      
+                }
                 </div>
                 </Row>
               //<Button variant="primary">Продолжить</Button>{ ' ' }
@@ -87,8 +90,20 @@ export class Calendar extends Component {
         });
         const data = await response.json();
         //this.setState({ availableTimes: data.map(TimeString => setHours(setMinutes(new Date(this.state.selectedDate), parseInt(TimeString.slice(3, 5))), parseInt(TimeString.slice(0, 2))))});
-        this.setState({ availableTimes: data.map(dateString => new Date(dateString)) });
-        console.log(data);
+        this.setState({ availableTimes: data.map(dateString => this.convertUTCToLocalDateIgnoringTimezone(dateString)) });
+    }
+
+    convertUTCToLocalDateIgnoringTimezone(dateString) {
+        var date = new Date(dateString);
+        return new Date(
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate(),
+            date.getUTCHours(),
+            date.getUTCMinutes(),
+            date.getUTCSeconds(),
+            date.getUTCMilliseconds(),
+        );
     }
 
     setDate(date) {

@@ -60,12 +60,12 @@ export class Userinfo extends Component {
             return (
             <Form>
                 <FormGroup>
-                    <Label for="UserName">Введите ваше Имя</Label>
-                    <Input type="text" name="UserName" id="UserName" placeholder="Ваше Имя" />
+                        <Label for="UserName">Введите ваше Имя</Label>
+                        <Input type="text" name="UserName" id="UserName" placeholder="Ваше Имя" />
                 </FormGroup>
                 <FormGroup>
                     <Label for="Email">Введите вашу электронную почту</Label>
-                    <Input type="email" name="email" id="Email" placeholder="Ваш e-mail" />
+                    <Input type="Phone" name="email" id="Email" placeholder="Ваш e-mail" /> 
                 </FormGroup>
                 <FormGroup>
                     <Label for="Description">Комментарий</Label>
@@ -78,7 +78,7 @@ export class Userinfo extends Component {
                                 userName: document.getElementById("UserName").value,
                                 email: document.getElementById("Email").value,
                                 description: document.getElementById("Description").value
-                            })}>Подтвердить</Button>{' '}
+                            })}>Записаться</Button>{' '}
                 </FormGroup>
             </Form>
             )
