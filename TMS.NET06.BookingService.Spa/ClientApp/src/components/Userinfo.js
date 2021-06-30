@@ -34,6 +34,7 @@ export class Userinfo extends Component {
             })
         });
         const data = await response.json();
+        console.log(data);
         if (data == true) this.setState({ addedBookingEntry: true });
     }
 
