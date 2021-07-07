@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 export class Userinfo extends Component {
     constructor(props) {
         super(props);
-        this.state = { addedBookingEntry: false };
+        this.state = { addedBookingEntry: false, resultOfAdding: null  };
         this.serviceId = this.props.serviceId;
         this.selectedDate = this.props.selectedDate;
 
@@ -34,8 +34,7 @@ export class Userinfo extends Component {
             })
         });
         const data = await response.json();
-        console.log(data);
-        if (data == true) this.setState({ addedBookingEntry: true });
+        this.setState({ addedBookingEntry: true, resultOfAdding: data });
     }
 
     render() {
@@ -44,7 +43,7 @@ export class Userinfo extends Component {
                 <Col sm={12}>
                     <Row>
                         <Col sm={12}>
-                            <p><em>Ваша запись принята в обработку</em></p>
+                            <p><em>{(this.state.resultOfAdding) ? ('Ваша запись принята в обработку') : ('Произошла ошибка, попробуйте позже')}</em></p>
                         </Col>
                     </Row>
                     <Row>

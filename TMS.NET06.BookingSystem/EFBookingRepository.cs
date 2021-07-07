@@ -197,9 +197,17 @@ namespace TMS.NET06.BookingSystem
         public async Task<bool> AddBookingEntry(BookEntry bookEntry)
         {
             await using var context = CreateContext();
-            context.Clients.Add(bookEntry.Client);
+            //context.Clients.Add(bookEntry.Client);
             context.BookingEntries.Add(bookEntry);
-            context.SaveChanges();
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(DbUpdateException ex)
+            {
+                return false;
+            }
 
             return true;
         }

@@ -33,8 +33,6 @@ namespace TMS.NET06.BookingService.Spa.Controllers
         [Route("[action]")]
         public Task<IEnumerable<DateTime>> AvailableDatesAsync(int serviceId)
         {
-            System.Threading.Thread.Sleep(1000);
-
             // Поменять значение на переменные при реализации ввода администратором кол-ва дней для записи и кол-ва рабочих часов.
             List<DateTime> AvailableDates = _bookingRepository.GetDatesList(60, 9);
 
