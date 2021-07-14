@@ -16,11 +16,11 @@ namespace TMS.NET06.BookingSystem
 
         public string Comment { get; set; }
 
-        //[ForeignKey("ServiceId")]
+        [ForeignKey("ServiceId")]
         public Service Service { get; set; }
 
-        //[Required]
-        //public int ServiceId { get; set; }
+        [Required]
+        public int ServiceId { get; set; }
 
         public DateTime VisitDate { get; set; }
 

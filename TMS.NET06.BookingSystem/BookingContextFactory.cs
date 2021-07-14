@@ -11,7 +11,7 @@ namespace TMS.NET06.BookingSystem
     {
         public BookingContext CreateDbContext(string[] args)
         {
-            var connectionString = args[1];
+            var connectionString = args[0];
             return new BookingContext(connectionString);
         }
     }

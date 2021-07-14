@@ -61,7 +61,7 @@ namespace TMS.NET06.BookingService.Spa.Controllers
 
             var bookEntry = new BookEntry()
             {
-                Service = await _bookingRepository.GetServiceAsync(addBookingEntryRequest.ServiceId),
+                ServiceId = addBookingEntryRequest.ServiceId, //await _bookingRepository.GetServiceAsync(addBookingEntryRequest.ServiceId),
                 VisitDate = addBookingEntryRequest.SelectedDate.ToLocalTime(),
                 Comment = addBookingEntryRequest.Description,
                 Client = client,
