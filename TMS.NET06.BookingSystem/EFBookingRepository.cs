@@ -120,7 +120,7 @@ namespace TMS.NET06.BookingSystem
             return new BookingContext(_configuration.GetConnectionString("BookingDb"));
         }
 
-        public List<DateTime> GetDatesList(int countDays)
+        public List<DateTime> GetDatesList(int countDays, int countWorkHours)
         {
             using var context = CreateContext();
             var visitDates = context.BookingEntries.Where(be => be.VisitDate >= DateTime.Now.Date && be.VisitDate < DateTime.Now.Date.AddDays(countDays + 1))
@@ -134,7 +134,7 @@ namespace TMS.NET06.BookingSystem
             {
                 var visitDatesForCurrDate = visitDates.Where(v => v.VisitDate >= currDate.Date && v.VisitDate < currDate.Date.AddDays(1)).ToArray();
 
-                if (visitDatesForCurrDate.Count() >= 9)
+                if (visitDatesForCurrDate.Count() >= countWorkHours)
                 {
                     continue;
                 }
@@ -192,6 +192,24 @@ namespace TMS.NET06.BookingSystem
             }
 
             return timeList;
+        }
+
+        public async Task<bool> AddBookingEntry(BookEntry bookEntry)
+        {
+            await using var context = CreateContext();
+            //context.Clients.Add(bookEntry.Client);
+            context.BookingEntries.Add(bookEntry);
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(DbUpdateException ex)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

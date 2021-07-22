@@ -10,7 +10,7 @@ using TMS.NET06.BookingSystem;
 namespace TMS.NET06.BookingSystem.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    [Migration("20210419165451_Initial")]
+    [Migration("20210714193536_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace TMS.NET06.BookingSystem.Migrations
                     b.Property<string>("NotificationInfo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ServiceId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -99,7 +99,9 @@ namespace TMS.NET06.BookingSystem.Migrations
 
                     b.HasOne("TMS.NET06.BookingSystem.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
 

@@ -35,7 +35,7 @@ namespace TMS.NET06.BookingSystem.Migrations
                     b.Property<string>("NotificationInfo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ServiceId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -97,7 +97,9 @@ namespace TMS.NET06.BookingSystem.Migrations
 
                     b.HasOne("TMS.NET06.BookingSystem.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
 

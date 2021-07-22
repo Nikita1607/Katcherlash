@@ -33,9 +33,8 @@ namespace TMS.NET06.BookingService.Spa.Controllers
         [Route("[action]")]
         public Task<IEnumerable<DateTime>> AvailableDatesAsync(int serviceId)
         {
-            System.Threading.Thread.Sleep(1000);
-            //return Task.FromResult(new[] { DateTime.Now.Date, DateTime.Now.AddMonths(1) }.AsEnumerable());
-            List<DateTime> AvailableDates = _bookingRepository.GetDatesList(60);
+            // Поменять значение на переменные при реализации ввода администратором кол-ва дней для записи и кол-ва рабочих часов.
+            List<DateTime> AvailableDates = _bookingRepository.GetDatesList(60, 9);
 
             return Task.FromResult(AvailableDates.AsEnumerable());
         }
@@ -44,65 +43,32 @@ namespace TMS.NET06.BookingService.Spa.Controllers
         [Route("[action]")]
         public Task<IEnumerable<DateTime>> AvailableTimesAsync([FromBody] AvaliableTimeRequest avaliableTimeRequest )
         {
-            //return Task.FromResult(GetTimesList(avaliableTimeRequest.serviceId, avaliableTimeRequest.date).AsEnumerable());
             return Task.FromResult(_bookingRepository.GetTimesList(avaliableTimeRequest.date).AsEnumerable());
         }
 
-        //private List<String> GetTimesList_old(int serviceId , DateTime date)
-        //{
-        //    return new List<string>()
-        //    {
-        //        "01:00",
-        //        "02:00",
-        //        "03:00",
-        //        "04:00",
-        //        "05:00",
-        //        "06:00",
-        //        "09:30",
-        //        "10:00",
-        //        "10:30",
-        //        "11:00",
-        //        "11:30",
-        //        "19:30",
-        //        "20:30",
-        //        "21:30",
-        //        "22:30",
-        //    };
-        //}
-
         [HttpPost]
         [Route("[action]")]
-        public Task<bool> AddBookingEntryAsync([FromBody] AddBookingEntryRequest addBookingEntryRequest)
+        public async Task<bool> AddBookingEntryAsync([FromBody] AddBookingEntryRequest addBookingEntryRequest)
         {
-            using (var bookingContext = new BookingContext())
+            var client = new Client()
             {
-                //Поиск существующего по контактной информации
-                var client = new Client()
+                Name = addBookingEntryRequest.Username,
+                ContactInformation = new ContactInfo()
                 {
-                    Name = addBookingEntryRequest.Username,
-                    ContactInformation = new ContactInfo()
-                    {
-                        Email = addBookingEntryRequest.Email
-                    }
-                };
+                    Email = addBookingEntryRequest.Email
+                }
+            };
 
-                bookingContext.Clients.Add(client);
+            var bookEntry = new BookEntry()
+            {
+                ServiceId = addBookingEntryRequest.ServiceId, //await _bookingRepository.GetServiceAsync(addBookingEntryRequest.ServiceId),
+                VisitDate = addBookingEntryRequest.SelectedDate.ToLocalTime(),
+                Comment = addBookingEntryRequest.Description,
+                Client = client,
+                Status = BookingStatus.Confirmed
+            };
 
-                var bookEntry = new BookEntry()
-                {
-                    Service = bookingContext.Services.Single(s => s.ServiceId == addBookingEntryRequest.ServiceId),
-                    VisitDate = addBookingEntryRequest.SelectedDate.ToLocalTime(),
-                    Comment = addBookingEntryRequest.Description,
-                    Client = client,
-                    Status = BookingStatus.Confirmed
-                };
-
-                bookingContext.BookingEntries.Add(bookEntry);
-
-                bookingContext.SaveChanges();
-            }
-
-            return Task.FromResult(true);
+            return await _bookingRepository.AddBookingEntry(bookEntry);
         }
     }
 }

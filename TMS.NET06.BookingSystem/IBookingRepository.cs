@@ -30,8 +30,10 @@ namespace TMS.NET06.BookingSystem
 
         Task<Service> GetServiceAsync(int serviceId);
 
-        List<DateTime> GetDatesList(int countDays);
+        List<DateTime> GetDatesList(int countDays, int countWorkHours);
 
         List<DateTime> GetTimesList(DateTime selectedDate);
+
+        Task<bool> AddBookingEntry(BookEntry bookEntry);
     }
 }
